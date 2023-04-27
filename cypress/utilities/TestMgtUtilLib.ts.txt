@@ -1,0 +1,30 @@
+
+export interface JiraIssue {
+  id: string;
+  key: string;
+  summary: string;
+  description: string;
+}
+
+export const getIssueDetailsById = async (issueId: string): Promise<JiraIssue> => {
+  const response = await Promise.resolve(cy.request<JiraIssue>({
+    method: 'GET',
+    url: `${Cypress.env('JIRA_API_BASE_URL')}/issue/${issueId}`,
+    auth: {
+      username: Cypress.env('JIRA_API_USERNAME'),
+      password: Cypress.env('JIRA_API_PASSWORD'),
+    },
+  }));
+
+  const { id, key, fields } = response;  //body
+  const { summary, description } = fields;
+
+  const jiraIssue: JiraIssue = {
+    id,
+    key,
+    summary,
+    description,
+  };
+
+  return jiraIssue;
+};

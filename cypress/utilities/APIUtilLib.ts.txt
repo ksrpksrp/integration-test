@@ -1,0 +1,80 @@
+interface RequestOptions {
+  headers?: Record<string, string>;
+  body?: Record<string, any> | string;
+}
+
+/**
+ * Utility function to send a POST request to an API endpoint.
+ * @param url - The URL to send the request to.
+ * @param options - Optional request options (e.g. headers or body).
+ * @returns The response from the API.
+ */
+export const post = (url: string, options?: RequestOptions) => {
+  return cy.request({
+    method: 'POST',
+    url,
+    ...options,
+  });
+};
+
+/**
+ * Utility function to send a GET request to an API endpoint.
+ * @param url - The URL to send the request to.
+ * @param options - Optional request options (e.g. headers or query parameters).
+ * @returns The response from the API.
+ */
+export const get = (url: string, options?: RequestOptions) => {
+  return cy.request({
+    method: 'GET',
+    url,
+    ...options,
+  });
+};
+
+/**
+ * Utility function to send a PUT request to an API endpoint.
+ * @param url - The URL to send the request to.
+ * @param options - Optional request options (e.g. headers or body).
+ * @returns The response from the API.
+ */
+export const put = (url: string, options?: RequestOptions) => {
+  return cy.request({
+    method: 'PUT',
+    url,
+    ...options,
+  });
+};
+
+/**
+ * Utility function to send a DELETE request to an API endpoint.
+ * @param url - The URL to send the request to.
+ * @param options - Optional request options (e.g. headers or body).
+ * @returns The response from the API.
+ */
+export const  del = (url: string, options?: RequestOptions) => {
+  return cy.request({
+    method: 'DELETE',
+    url,
+    ...options,
+  });
+};
+
+/**
+ * Utility function to extract a token from an API response.
+ * Assumes the response contains a JSON body with a "token" field.
+ * @param response - The response from the API.
+ * @returns The token.
+ */
+export const extractToken = (response: Cypress.Response<any>) => {
+  return response.body.token;
+};
+
+
+/**
+ * Utility function to assert that an API response contains a certain header.
+ * @param response - The response from the API.
+ * @param header - The header to check for.
+ */
+export const assertResponseHeader = (response: Cypress.Response<any>, header: string) => {
+  expect(response.headers[header]).to.exist;
+};

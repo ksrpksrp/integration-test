@@ -1,0 +1,33 @@
+export const maximizeWindow = () => {
+  cy.window().then((win) => {
+    win.resizeTo(screen.availWidth, screen.availHeight);
+  });
+};
+/*export const maximizeWindow = () => {
+  cy.window().then((win) => {
+    win.parent.outerHeight = screen.height;
+    win.parent.outerWidth = screen.width;
+  });
+};*/
+//Cannot assign to 'outerHeight' because it is a read-only property.
+export const switchToWindowByTitle = (windowTitle: string) => {
+  cy.window().then((win) => {
+    cy.wrap(win).should("have.property", "top", win.top);
+    cy.wrap(win)
+      .its("document")
+      .should("have.property", "title")
+      .should("eq", windowTitle);
+  });
+};
+
+export const setWindowSize = (width: number, height: number) => {
+  cy.viewport(width, height);
+};
+
+export const switchToTab = (tabIndex: number) => {
+  cy.get("body").type("{ctrl}{tab}".repeat(tabIndex));
+};
+
+export const closeCurrentTab = () => {
+  cy.get("body").type("{ctrl}{w}");
+};

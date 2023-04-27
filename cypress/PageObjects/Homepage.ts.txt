@@ -1,0 +1,46 @@
+import { clearInputAndType, scrollToElement, selectContainOption, clickAndWait, selectOption, validateDoD, visitAndClearCookies } from '../utilities/FrameworkUtilLib'
+
+class Homepage {
+    //All Css for the page objects should be kept here
+    selectBroker = '.mat-select-placeholder';
+    goBtn = '[data-testid="next"]';
+    clickOnProduct = ':nth-child(1) > formly-wrapper-mat-form-field.ng-star-inserted > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix';
+    clickCountry = '[style=""] > formly-wrapper-mat-form-field.ng-star-inserted > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix';
+    nextBtn = '[data-testid="next"]';
+    dutyofDisclosure = '#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label';
+    chkbox = '.mat-checkbox-inner-container';
+    countryNxtBtn = '[data-testid="selectCountryNext"]';
+    //writing page objects Using utility library functions
+    visitStagesite(url: string) {
+        visitAndClearCookies(url)
+    }
+    clickonSelectBroker(name: any) {
+        //validateDoD(this.selectBroker, ' Select broker ')
+        clickAndWait(this.selectBroker)
+        selectContainOption(name)
+    }
+    clickOnGoBtn() {
+        clickAndWait(this.goBtn)
+    }
+    clickOnSelectProduct(pname: string) {
+        clickAndWait(this.clickOnProduct)
+        selectContainOption(pname)
+    }
+    clickOnCountry(country: string) {
+        clickAndWait(this.clickCountry)
+        selectContainOption(country)
+    }
+    clickOnNextBtn() {
+        clickAndWait(this.nextBtn)
+    }
+    validateDutyofDiscolsure() {
+        validateDoD(this.dutyofDisclosure, 'Duty Of Disclosure')
+    }
+    selectChkbox() {
+        clickAndWait(this.chkbox)
+    }
+    clickCountryNxt() {
+        clickAndWait(this.countryNxtBtn)
+    }
+}
+export default Homepage;

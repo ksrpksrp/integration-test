@@ -1,0 +1,20 @@
+import Homepage from "../../../../PageObjects/Homepage";
+let ln = new Homepage()
+describe('Customer Journey - HSAB Aviation NZ General', () => {
+
+    it('Navigate to the quote landing page using the intermediary originator, proceed to NZ Aviation General Market Portal', () => {
+        cy.fixture('nZAviationGeneralMarket-data.json').then((data) => {
+
+            ln.visitStagesite(data.url);
+            ln.clickonSelectBroker(data.brokerName);
+            ln.clickOnGoBtn();
+            ln.clickOnSelectProduct(data.productName);
+            ln.clickOnCountry(data.selectCounttry);
+            ln.clickOnNextBtn();
+            ln.validateDutyofDiscolsure();
+            ln.selectChkbox();
+            ln.clickCountryNxt();
+        })
+
+    })
+})

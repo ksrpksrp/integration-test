@@ -1,0 +1,62 @@
+export const isAlertPresent = () => {
+  return cy.window().then((win) => {
+    return new Cypress.Promise<boolean>((resolve) => {
+      win.addEventListener('alert', () => {
+        resolve(true);
+      });
+      win.alert('Test');
+      win.setTimeout(() => {
+        resolve(false);
+      }, 0);
+    });
+  });
+};
+
+export const acceptAlert = () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal('Expected Alert Text');
+  });
+  cy.on('window:confirm', (str) => {
+    expect(str).to.equal('Expected Confirm Text');
+  });
+  cy.on('window:prompt', (str) => {
+    expect(str).to.equal('Expected Prompt Text');
+  });
+  cy.get('body').then(($body) => {
+    if ($body.find('iframe').contents().find('body').find('#alertify-cover').length) {
+      cy.get('#alertify-ok').click();
+    } else {
+      cy.get('body').type('{enter}');
+    }
+  });
+};
+
+export const cancelAlert = () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal('Expected Alert Text');
+  });
+  cy.on('window:confirm', (str) => {
+    expect(str).to.equal('Expected Confirm Text');
+  });
+  cy.on('window:prompt', (str) => {
+    expect(str).to.equal('Expected Prompt Text');
+  });
+  cy.get('body').then(($body) => {
+    if ($body.find('iframe').contents().find('body').find('#alertify-cover').length) {
+      cy.get('#alertify-cancel').click();
+    } else {
+      cy.get('body').type('{esc}');
+    }
+  });
+};
+
+export const getAlertText = () => {
+  return cy.window().then((win) => {
+    return new Cypress.Promise<string>((resolve) => {
+      win.addEventListener('alert', (event) => {
+        resolve(); //event.message
+      });
+      win.alert('Test');
+    });
+  });
+};

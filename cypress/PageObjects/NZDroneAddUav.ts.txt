@@ -1,0 +1,111 @@
+import { clearInputAndType, clickAndWait, selectContainOption } from "../utilities/FrameworkUtilLib";
+
+class AddUav {
+
+    AddUav='[data-testid="openAddUavDialog-upgraded"] > .mat-button-wrapper';
+    RegNoEntVal='#formly_36_input_serialNumber_1';
+    ManufacturerField='.mat-select-arrow-wrapper.ng-tns-c175-21';
+    Model='.mat-select-arrow-wrapper.ng-tns-c175-24';
+    ModelYr='.mat-select-arrow-wrapper.ng-tns-c175-26';
+    State='.mat-select-arrow-wrapper.ng-tns-c175-30';
+    PostalCode='#formly_41_input_hangarAddressPostalCode_2';
+    CoverageTy='.mat-select-arrow-wrapper.ng-tns-c175-33';
+    Operations='.mat-select-arrow-wrapper.ng-tns-c175-35';
+    Uses='.mat-select-arrow-wrapper.ng-tns-c175-37';
+    AgreedValue='#mat-input-3';
+    ThirdPartyLiablty='.mat-select-arrow-wrapper.ng-tns-c175-42';
+    AddDroneBtn="button[class='btn btn-primary']";
+     
+   ClickOnAddUav()
+   {
+   
+    clickAndWait(this.AddUav)
+    
+   }
+   ClickOnRegVal(Re:string)
+   {
+   // cy.wait(2000)
+    //cy.get(this.RegNoEntVal).type(Re)
+    clearInputAndType(this.RegNoEntVal,Re)
+   }
+   ClickONManufacturefld(Manval:string)
+   {
+   
+    clickAndWait(this.ManufacturerField)
+       selectContainOption(Manval)
+   }
+  ClickOnModel(Mo1:string)
+  {
+   
+    clickAndWait(this.Model)
+       selectContainOption(Mo1)
+  }
+  ClickModelYr(yr:string)
+  {
+    
+   clickAndWait(this.ModelYr)
+       selectContainOption(yr)
+  }
+  SelectState(st:string)
+  {
+    
+    clickAndWait(this.State)
+       selectContainOption(st)
+  }
+  EnterPostalCode(pc:string)
+  {
+    //cy.get(this.PostalCode).type(pc)
+    clearInputAndType(this.PostalCode,pc)
+  }
+  SelectCoverage(co:string)
+  {
+   
+    clickAndWait(this.CoverageTy)
+       selectContainOption(co)
+  }
+  ClickOnOperations(opval:any)
+  {
+    
+       clickAndWait(this.Operations)
+       selectContainOption(opval)
+       cy.wait(3000)
+       cy.get('body').trigger('keydown', { keyCode: 27});
+       cy.wait(500); 
+       cy.get('body').trigger('keyup', { keyCode: 27});
+  }
+  ClickOnUser(Uval:any)
+  {
+    
+       clickAndWait(this.Uses)
+       selectContainOption(Uval)
+       cy.get('body').trigger('keydown', { keyCode: 27});
+       cy.wait(500); 
+       cy.get('body').trigger('keyup', { keyCode: 27});
+  }
+  EnterAgreedval(Ava:any)
+  {
+    //cy.get(this.AgreedValue).type(Ava)
+    clearInputAndType(this.AgreedValue,Ava)
+  }
+  EnterThirdPartyVal(Tval:string)
+  {
+    
+    clickAndWait(this.ThirdPartyLiablty)
+    selectContainOption(Tval)
+  }
+  ClickOnAddDroneBtn()
+  {
+    
+    clickAndWait(this.AddDroneBtn)
+  }
+}
+export default AddUav
+
+
+
+
+
+
+
+
+

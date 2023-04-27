@@ -1,0 +1,36 @@
+
+
+
+
+{
+    "url": "https://login.pastage.cloud/landing/intermediary-regression-rfdlvqinof",
+    "brokerName": "Sharad Awasthi",
+    "productName": "Drone",
+    "selectCounttry": "New Zealand",
+    "description": "Equipment 1",
+    "EqupPurchaseValue": "500",
+    "enterinterparty": "Test Interested Party",
+    "interestedPartyName": "Financial Interest",
+    "PublicLiabilityVal":"NZD 5,000,000",
+    "payloadvalue": "Camera",
+    "payloaddesc":"Payload 1",
+    "payloadPurchaseValue":"1500",
+    "CompanyName":"Regression Test",
+    "Add":"123 Fake St",
+    "cty":"City",
+    "PostalCode":"3000",
+    "pcode":"3000",
+     "Regestval":"ABC-123",
+    "ManufactureValu":"Test Fixture Manufacturer",
+    "Model1":"UAV Model 1",
+    "ModelYr":"2021",
+    "State":"Auckland",
+    "CoverageVal":"Hull & Liability",
+    "opval":"Visual Line of Sight, below 400 feet",
+    "Uval":"Aerial Photography or Surveying",
+    "Ava":"5000",
+    "Tval":"NZD 1,000,000"
+    
+
+}
+

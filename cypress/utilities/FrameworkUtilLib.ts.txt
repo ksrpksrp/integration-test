@@ -1,0 +1,119 @@
+//import 'cypress-file-upload';
+export const clearInputAndType = (selector: string, text: string) => {
+  return cy.get(selector).clear().type(text);
+};
+
+export const evntWaitSelector = (selector: string) => {
+   return  cy.wait(selector);
+};
+
+export const dragAndDrop = (source: string, target: string) => {
+ return  cy.get(source).trigger('mousedown', { which: 1 })
+    .get(target).trigger('mousemove').trigger('mouseup', { force: true });
+};
+
+export const fillForm = (form: Record<string, string>) => {
+ return  Object.keys(form).forEach((key) => {
+    cy.get(`[name=${key}]`).type(form[key]);
+  });
+};
+
+export const focusAndClear = (selector: string) => {
+ return  cy.get(selector).focus().clear().blur();
+};
+
+export const scrollToElement = (selector: string) => {
+  return cy.get(selector).scrollIntoView({ offset: { top: 0, left: 0 } });
+};
+
+export const setLocalStorage = (key: string, value: string) => {
+ return  cy.window().then((win) => {
+    win.localStorage.setItem(key, value);
+  });
+};
+
+//export const uploadFile = (selector: string, fileName: string) => {
+  //cy.get(selector).attachFile(fileName);
+//};
+//Property 'attachFile' does not exist on type 'Chainable<JQuery<HTMLElement>>'.ts(2339)
+export const clickAndWait = (selector: string) => {
+  cy.get(selector, { timeout: 10000 }).should('be.visible')
+  return cy.get(selector).click();
+  //cy.wait(1000);
+};
+
+export const selectOption = (selector: string, value: string) => {
+ return  cy.get(selector).select(value);
+};
+
+export const selectContainOption = (value: string) => {
+    //cy.get(selector).select(value);
+    //cy.wait(3000)
+   return  cy.contains(value,{ timeout: 10000 }).scrollIntoView().click()
+};
+
+export const typeAndSelectOption = (selector: string, value: string) => {
+  cy.get(selector).type(value);
+  return cy.get('.select2-results__option').first().click();
+};
+
+export const visitAndClearCookies = (url: string) => {
+  cy.clearCookies();
+  return cy.visit(url);
+};
+
+export const isValidNonEmptyString = (value: any): boolean => {
+  return typeof value === 'string' && value.trim().length > 0;
+};
+
+export const validateDoD = (selector: string, value: string) => {
+        cy.get(selector, { timeout: 20000 }).should('be.visible')
+       return cy.get(selector).contains(value)
+}
+  
+export const generateRandomPhoneNumber = (): string => {
+  let phoneNumber = '';
+  const phoneNumberLength = 10;
+  for (let i = 0; i < phoneNumberLength; i++) {
+    phoneNumber += Math.floor(Math.random() * 10).toString();
+  }
+  return phoneNumber;
+};
+
+//This function checks if the value of a specified element matches a given string. 
+//It can be useful for verifying that form fields have been filled in correctly
+export const assertValueMatch = (selector: string, expectedValue: string) => {
+  cy.get(selector).should('have.value', expectedValue);
+};
+
+export const assertTextInUrl = (text: string) => {
+  cy.url().should('contain', text);
+};
+
+export const generateRandomString = (length: number = 10) => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYjhdfjkshjkdfsjkdflmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+};
+
+export const waitUntil = (conditionFn: () => boolean, timeout: number = 5000) => {
+  let elapsedTime = 0;
+  const intervalTime = 100;
+  return new Promise<void>((resolve, reject) => {
+    const interval = setInterval(() => {
+      if (conditionFn()) {
+        clearInterval(interval);
+        resolve();
+      } else {
+        elapsedTime += intervalTime;
+        if (elapsedTime > timeout) {
+          clearInterval(interval);
+          reject(new Error(`Timeout exceeded while waiting for condition to be true`));
+        }
+      }
+    }, intervalTime);
+  });
+};

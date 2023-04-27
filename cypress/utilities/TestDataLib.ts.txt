@@ -1,0 +1,74 @@
+//readCsvData
+//writeCsv
+//readExcel
+//writeExcel
+import { readFile } from "xlsx";
+import { parse } from "papaparse";
+import * as fs from "fs-extra";
+import * csv from 'csvtojson'; 
+interface CsvRow {
+  name: string;
+  age: number;
+}
+
+// Reads data from a CSV file and returns an array of objects, with the first row as keys and subsequent rows as values.
+export const readCsvData = (filename: string): CsvRow[] => {
+  const csvFile = fs.readFileSync(`./cypress/fixtures/${filename}`, "utf8");
+  const csvData = parse(csvFile.toString(), {
+    header: true,
+    skipEmptyLines: true,
+  });
+  return csvData.data as CsvRow[];
+};
+
+// Writes data to a CSV file, with the first object's keys as header row and subsequent objects' values as rows.
+export const writeCsv = (filename: string, data: CsvRow[]) => {
+  const header = Object.keys(data[0]).join(",") + "\n";
+  const rows = data.map((row) => Object.values(row).join(",") + "\n").join("");
+  const content = header + rows;
+  fs.writeFileSync(`./cypress/fixtures/${filename}`, content);
+};
+
+// Reads data from an Excel file and returns an array of objects, with the first row as keys and subsequent rows as values.
+export const readExcel = (filename: string, sheetName: string): CsvRow[] => {
+  const excelFile = fs.readFileSync(`./cypress/fixtures/${filename}`);
+  const workbook = readFile(excelFile.toString());
+  const worksheet = workbook.Sheets[sheetName];
+  const sheetData = parse(
+    readFile(excelFile.toString(), { type: "buffer" }).toString(),
+    {
+      header: true,
+      skipEmptyLines: true,
+    }
+  );
+  return sheetData.data as CsvRow[];
+};
+
+// Writes data to an Excel file, with the first object's keys as header row and subsequent objects' values as rows.
+export const writeExcel = (
+  filename: string,
+  sheetName: string,
+  data: CsvRow[]
+) => {
+  const header = Object.keys(data[0]);
+  const rows = data.map((row) => Object.values(row));
+  const worksheet = { [sheetName]: [...rows] };
+  const workbook = { Sheets: worksheet, SheetNames: [sheetName] };
+  const buffer = new ArrayBuffer(8);
+  const view = new Uint8Array(buffer);
+  const file = new Blob([buffer]);
+  fs.writeFileSync(`./cypress/fixtures/${filename}`, file.toString());
+};
+
+export const convertCsvToJson = (csvFilePath: string) => {
+  return new Promise((resolve, reject) => {
+    csv()
+      .fromFile(csvFilePath)
+      .then((jsonObj: any) => {
+        resolve(jsonObj);
+      })
+      .catch((err: any) => {
+        reject(err);
+      });
+  });
+};

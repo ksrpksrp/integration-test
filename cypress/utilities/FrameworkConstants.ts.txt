@@ -1,0 +1,9 @@
+//export const BASE_URL = 'https://example.com';
+//export const LOGIN_USERNAME = 'testuser';
+//export const LOGIN_PASSWORD = 'testpassword';
+//export const ERROR_MESSAGES = {
+  //INVALID_CREDENTIALS: 'Invalid username or password',
+  //MISSING_FIELD: 'Please fill out all required fields',
+  // more error messages...
+//};
+// we need to Use based on requirment so we can add other constant variable as well 

@@ -1,0 +1,50 @@
+// Key Event Enter
+export function keyEventEnter() {
+  return cy.get('body').type('{enter}');
+}
+
+// Key Event Escape
+export function keyEventEscape() {
+  return cy.get('body').type('{esc}');
+}
+
+// Key Event Space
+export function keyEventSpace() {
+ return  cy.get('body').type('{space}');
+}
+
+// Key Event Tab
+export function keyEventTab() {
+   return  cy.get('input').then(($input) => {
+  // Type casting to inform TypeScript that $input has the 'tab' property
+  const inputWithTab = $input as unknown as { tab: () => Cypress.Chainable<void> };
+  // Trigger the 'tab' event
+  inputWithTab.tab();
+});
+ 
+}
+
+// Key Event Up Arrow
+export function keyEventUpArrow() {
+  return  cy.get('body').type('{uparrow}');
+}
+
+// Key Event Down Arrow
+export function keyEventDownArrow() {
+  return  cy.get('body').type('{downarrow}');
+}
+
+// Key Event Left Arrow
+export function keyEventLeftArrow() {
+  return cy.get('body').type('{leftarrow}');
+}
+
+// Key Event Right Arrow
+export function keyEventRightArrow() {
+ return  cy.get('body').type('{rightarrow}');
+}
+
+// Mouse Hover
+export function mouseHover(selector: string) {
+ return  cy.get(selector).trigger('mouseover');
+}

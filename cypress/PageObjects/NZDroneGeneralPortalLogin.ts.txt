@@ -1,0 +1,59 @@
+import { clickAndWait, selectContainOption, validateDoD } from "../utilities/FrameworkUtilLib";
+
+
+
+class NZDronePortalLogin {
+    selectBroker = '.mat-form-field-infix';
+    goBtn = '[data-testid="next"]';
+    clickOnProduct = ':nth-child(1) > formly-wrapper-mat-form-field.ng-star-inserted > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix';
+    clickCountry = '[style=""] > formly-wrapper-mat-form-field.ng-star-inserted > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix';
+    nextBtn = '[data-testid="next"]';
+    dutyofDisclosure = '#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label';
+    chkbox = '.mat-checkbox-inner-container';
+    countryNxtBtn = '[data-testid="selectCountryNext"]';
+    visitStagesite(url: string) {
+        cy.visit(url);
+        //cy.url().should('contanins','pastage')
+    }
+    clickonSelectBroker(name: string) {
+      
+        clickAndWait(this.selectBroker)
+       selectContainOption(name)
+    }
+    clickOnGoBtn() {
+        cy.get(this.goBtn).click()
+    }
+    clickOnSelectProduct(pname: string) {
+        
+        clickAndWait(this.clickOnProduct)
+        selectContainOption(pname)
+        
+    }
+    clickOnCountry(country: string) {
+      
+        clickAndWait(this.clickCountry)
+        selectContainOption(country)
+        
+    }
+    clickOnNextBtn() {
+       
+        clickAndWait(this.nextBtn)
+    }
+    validateDutyofDiscolsure(){
+      
+        validateDoD(this.dutyofDisclosure, 'Duty Of Disclosure')
+    }
+    selectChkbox() {
+       
+        clickAndWait(this.chkbox)
+    }
+    clickCountryNxt() {
+      
+        clickAndWait(this.countryNxtBtn)
+    }
+
+
+}
+export default NZDronePortalLogin;
+
+

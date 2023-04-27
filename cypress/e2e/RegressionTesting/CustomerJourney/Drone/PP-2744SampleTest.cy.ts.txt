@@ -1,0 +1,42 @@
+import NZDronePortalLogin from '../../../../PageObjects/NZDroneGeneralPortalLogin'
+import AddUav from '../../../../PageObjects/NZDroneAddUav'
+let ln = new NZDronePortalLogin();
+let uv =new AddUav
+
+describe('Customer Journey - HSAB Drone NZ General', () => {
+    it('Navigate to the quote landing page using the intermediary originator, proceed to NZ Aviation General Market Portal', () => {
+
+        
+        cy.fixture('nZDroneGeneralMarket-data.json').then((data) => {
+
+
+            ln.visitStagesite(data.url);
+            ln.clickonSelectBroker(data.brokerName);
+            ln.clickOnGoBtn();
+            ln.clickOnSelectProduct(data.productName);
+            ln.clickOnCountry(data.selectCounttry);
+            ln.clickOnNextBtn();
+            ln.validateDutyofDiscolsure();
+            ln.selectChkbox();
+            ln.clickCountryNxt();
+
+          //Add UAV
+            uv.ClickOnAddUav();
+            uv.ClickOnRegVal(data.Regestval);
+            uv.ClickONManufacturefld(data.ManufactureValu);
+            uv.ClickOnModel(data.Model1);
+            uv.ClickModelYr(data.ModelYr);
+            uv.SelectState(data.State);
+            uv.EnterPostalCode(data.PostalCode);
+            uv.SelectCoverage(data.CoverageVal);
+            uv.ClickOnOperations(data.opval);
+            uv.ClickOnUser(data.Uval);
+            uv.EnterAgreedval(data.Ava);
+            uv.EnterThirdPartyVal(data.Tval);
+            uv.ClickOnAddDroneBtn();      
+
+        });
+
+        })
+    })
+  
