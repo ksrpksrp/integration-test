@@ -7,9 +7,6 @@ COPY package.json ./
 # Installing dependencies
 RUN npm install
 # Install cypress
-RUN npm install cypress --save-dev
-# set environment variables
-# exposing ports
-EXPOSE 8080
+RUN npm install cypress --save-dev typescript
 #set default commands
 CMD ["npm", "test"]
