@@ -1,12 +1,22 @@
-# base image
+# Official Node.js runtime as a parent image
 FROM node:14
-# setting work directory
+
+# Set the working directory 
 WORKDIR /e2e
-# copying package.json to container
-COPY package.json ./
-# Installing dependencies
+
+# Copy the package.json and package-lock.json files to the container
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
-# Install cypress
-RUN npm install cypress --save-dev typescript
-#set default commands
-CMD ["npm", "test"]
+RUN npm install --save-dev typescript
+RUN npm install cypress --save-dev
+
+# Copy the entire project directory to the container
+COPY . .
+
+# Expose the default Cypress port
+EXPOSE 3000
+
+# Start the Cypress test
+CMD ["npm", "run", "cypress:run"]
