@@ -1,0 +1,35 @@
+{
+  "name": "cypro",
+  "version": "1.0.0",
+  "description": "project for beginners",
+  "main": "index.js",
+  "scripts": {
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "test": "test",
+    "cypress:open": "cypress open",
+    "merge-reports": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/output.json",
+    "marge": "marge cypress/report/output.json --reportDir ./ --inline"
+  },
+  "keywords": [
+    "test",
+    "a",
+    "cypress",
+    "automation",
+    "framework"
+  ],
+  "author": "PA",
+  "license": "ISC",
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.37.0",
+    "allure-commandline": "^2.21.0",
+    "cypress": "^12.6.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-plugin-tab": "^1.0.5",
+    "mocha": "^10.2.0",
+    "mocha-allure-reporter": "^1.4.0",
+    "typescript": "^5.0.4"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}
