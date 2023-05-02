@@ -7,7 +7,7 @@ env:
   global:
     - AWS_REGION=us-east-1
     - AWS_ACCOUNT_ID=160505104229
-    - IMAGE_NAME=trial image
+    - IMAGE_NAME=trial_image
     - CLUSTER_NAME=trial cluster
     - TASK_FAMILY=cypress
     - TASK_CONTAINER_NAME=cyp_con
