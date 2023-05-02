@@ -4,7 +4,7 @@ FROM node:14
 # Set the working directory 
 WORKDIR /e2e
 
-# Copy the package.json and package-lock.json files to the container
+# Copy the package.json and package-lock.json files into the container
 COPY package*.json ./
 
 # Install dependencies
